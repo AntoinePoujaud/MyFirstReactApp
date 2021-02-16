@@ -1,5 +1,3 @@
-import React from 'react';
-
 let accessToken;
 
 const CLIENT_ID = "e5d304e4eb5b4060be6c2b4755454662";
@@ -16,7 +14,7 @@ const Spotify = {
         const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
 
         if(accessTokenMatch && expiresInMatch) {
-            const accessToken = accessTokenMatch[1];
+            accessToken = accessTokenMatch[1];
             const expiresIn = Number(expiresInMatch[1]);
             // This clears the parameters, allowing us to grab a new access token when it expires.
             window.setTimeout(() => accessToken = '', expiresIn * 1000);
@@ -72,7 +70,7 @@ const Spotify = {
                 method: 'POST',
                 body: JSON.stringify({ name: playlistName })
             })
-            .then(response => {response.json()})
+            .then(response => response.json())
             .then(jsonResponse => {
                 const playlistID = jsonResponse.id;
                 return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, 

@@ -22,6 +22,10 @@ class App extends React.Component {
     this.search = this.search.bind(this);
   }
 
+  componentDidMount() {
+    window.addEventListener('load', () => {Spotify.getAccessToken()});
+  }
+
   addTrack(track) {
     let tracks = this.state.playlistTracks;
 
